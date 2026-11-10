@@ -1,0 +1,18 @@
+services:
+  backend:
+    build:
+      context:  ./backend
+      dockerfile: Dockerfile
+    image: 638151077409.dkr.ecr.ap-southeast-2.amazonaws.com/backend:${VERSION}
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${API_URL}
+    image: 638151077409.dkr.ecr.ap-southeast-2.amazonaws.com/frontend:${VERSION}
+    ports:
+      - "3000:3000"
