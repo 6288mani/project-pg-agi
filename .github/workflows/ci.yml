@@ -2,22 +2,22 @@ name: ci
 
 on:
   push:
-
+permissions:
+  id-token: write
+  contents: read
 jobs:
   CI:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
+    
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v7
-        
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v6.3.0
         with:
+          audience: sts.amazonaws.com.cn
           aws-region: ap-south-2
-          role-to-assume: arn:aws:iam::050868805869:role/CustomRole
-          audience: sts.amazonaws.com
+          role-to-assume: ${{ secrets.OIDC_TOKEN }}
         
         
