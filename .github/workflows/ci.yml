@@ -6,6 +6,9 @@ on:
 jobs:
   CI:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v7
@@ -15,5 +18,6 @@ jobs:
         with:
           aws-region: ap-south-2
           role-to-assume: arn:aws:iam::050868805869:role/CustomOIDCGithubactions
+          audience: sts.amazonaws.com
         
         
